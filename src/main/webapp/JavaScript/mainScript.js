@@ -1,70 +1,10 @@
  var path = 'http://localhost:8080/mavenproject1/rest';
   
-function login(){
-  var person={
-        "username":document.getElementById("usernameField").value,
-        "password":document.getElementById("pswField").value
-    };
 
-  
-    $.ajax({
-        url: path+'/login',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(person),
-        success: function(response) {
-            var login = response.Valid;
-            // Login true
-            if (login === true){
-            alert('ok');
-            location.href = 'index.html';
-            }
-            // Login false
-            else {
-                     alert('close');
-            }
-        },
-        error: function(response){
-            
-            alert(response.Valid);
-        }
-    });
-
-    return false;
+function setframe(url) {
+	document.all.frame.src=url;
 }
 
-function forgotPass(){
-    var student={
-        "student":document.getElementById("emailpsw").value
-    };
-
-  
-    $.ajax({
-        url: path+'/email',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(student),
-        success: function(response) {
-            var send = response.Valid;
-            // Login true
-            if (send === true){
-            alert('Email sent to student email');
-            location.href = 'loginPage.html'
-            }
-            // Login false
-            else {
-                     alert('Wrong student ID');
-                     return false;
-            }
-        },
-        error: function(){
-            
-            alert("Error");
-        }
-    });
-
-    return false;
-}
 //    
 //function changePass(){
 //    //insert path for objects
@@ -160,21 +100,3 @@ function forgotPass(){
 //    
 //}
 
-function scores() {
- 
-    $.ajax({
-        url: path+'/service/score',
-        type: 'GET',
-        dataType: 'json',
-        data: JSON.stringify(scores),
-        Success: function(scores){
-            console.log(scores);
-            
-         },
-        Error: function(error){
-            alert('Something went wrong!');
-            
-         }
-
-     });    
-}
