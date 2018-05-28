@@ -4,17 +4,22 @@ $(document).ready(function() {
 	});
 
 });
-//var path = 'http://ubuntu4.saluton.dk:20002/mavenproject1/rest/game';
+//var path = 'http://ubuntu4.saluton.dk:20002/Galgeleg/rest/game';
 var path = 'http://localhost:8080/mavenproject1/rest/game';
                 
 var string;
-var lives = 6;
+var lives;
 var answers = [];
 var usedLetters = [];
 var letter;
 var correctLetters;
 var timeSpent;
 var word;
+var spilstatus;
+var tmp = [];
+var tmp1 = [];
+var incorrectWords = [];
+var noOfTries;
 
 function start(){
   
@@ -122,6 +127,11 @@ function getBrugteBogstaver() {
 
 function nulstil() {
     
+    document.getElementById("image").src="images/forkert0-web.png";
+    
+    
+    lives = 6;
+    
     $.ajax({
         url: path+"/nulstil",
         method: 'GET',
@@ -200,12 +210,60 @@ function erSpilletTabt(){
 }
 
 function logStatus() {
+    
+    
   
     $.ajax({
         url: path+"/logstatus",
         method: 'GET',
         success: function(response){
             console.log(response);
+            
+            spilstatus = response;
+            
+            tmp = spilstatus.split(":");
+            tmp1 = tmp[2].split("B");
+            incorrectWords = tmp1[0].split(" ");
+            noOfTries = incorrectWords[1];
+            noOfTries.replace("\n", "");
+            noOfTries.replace(" ", "");
+            noOfTries.replace("\t", "");
+            noOfTries = parseInt(noOfTries.trim());
+            
+            
+            switch(noOfTries) {
+        
+            case 1:
+                noOfTries = document.getElementById("image").src="images/forkert1-web.png";
+                break;
+            
+            case 2:
+                noOfTries = document.getElementById("image").src="images/forkert2-web.png";
+                break;
+            
+            case 3:
+                noOfTries = document.getElementById("image").src="images/forkert3-web.png";
+                break;
+            
+            case 4:
+                noOfTries = document.getElementById("image").src="images/forkert4-web.png";
+                break;
+            
+            case 5:
+                noOfTries = document.getElementById("image").src="images/forkert5-web.png";
+                break;
+            
+            case 6:
+                noOfTries = document.getElementById("image").src="images/forkert6-web.png";
+                break;
+        
+    }
+            
+            
+            
+            
+            
+            
             
             
             
